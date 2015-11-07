@@ -1,0 +1,105 @@
+CSCI 2141, Fall 2015 
+
+                    Term Project Guideline 
+
+                               Proposal Due: Nov. 4, Project Due: Dec. 8  
+
+ 
+
+1.  Objectives: 
+
+ 
+
+1)  To gain an in-depth understanding of the Relational Database concepts, the 
+DBMS  methods and techniques via developing a DB solution for a selected 
+application. 
+
+2)  To learn how to work as a team in a collaborative and efficient way (you are 
+
+encouraged to form a team up to 3 people). The focus in a work group is 
+individual goals and accountabilities. A team's performance is measured primarily 
+by the products produced collectively by the team. A short article for the tips how to 
+make a team successful: http://hrweb.mit.edu/learning-development/learning-
+topics/teams/articles/basics.  
+
+  
+2.  Requirements: 
+
+1)  Develop a web-based DB for a real application, such as for a small organization, or a 
+
+project of your own interest (e.g., http://infolab.stanford.edu/~ullman/fcdb/silverberg/home.html). 
+The list below includes the required basic components (a-f) and the optional: (g) with bonus 
+marks. 
+a) Business requirement analysis/generalization. 
+b) Design an ER diagram based on 1). 
+c) Convert 2) into relations with normalization validation. 
+d) Use result 3 to create the DB schema (tables in DDL) and move your data into 
+
+the DB. 
+
+e) Demonstrate the application usage with SQL programing, including information 
+
+retrieval, and DB update.  
+
+f)  User interface. 
+g) *Additional features include views, transaction handling, triggers, and stored 
+
+procedures, and security functions.  
+              *Bonus marks: +20% (4% per feature). 
+
+2)  Submit a single page project proposal by Nov. 4 by emailing it to 
+
+Parsa.Sarshar@Dal.Ca. The proposal should include the  following information. 
+a)  The project team members (up to 3 persons).  
+b)  The proposed project title and an abstraction of the application scenario.  
+c)  The tentative system & tools. 
+
+3)  Implement your database in MySQL using your account on the CS server, or via 
+
+some popular software bundles, such as LAMP, or XAMPP. You are also 
+allowed  to use any other system tools you like to develop the project as long as 
+they are available from a CS  computer for final evaluation. 
+
+4)  Each team is required to provide project a demo/presentation (10 minutes) on Dec.  
+      9th or 10th, 1:00-5:00pm, in CS233 (*Book a time if your team has a preference).  
+
+ 
+
+3.  Project Tutorials - Project guide & development tools:  
+
+1)  TA: Parsa Sarshar (Parsa.Sarshar@Dal.Ca). 
+2)  Tutorials: Nov. 6th, 20th.  
+
+
+4.  Project Report: 
+
+1)  Report format: use a single column research report/paper format. 
+2)  Cover page with the project title, team member names and IDs. 
+3)  Sections: 
+
+a)  Introduction: Describe the domain problem, the application scenario, 
+
+the business model and constraints, and the objectives, etc. 
+
+b)  System Design and Development: 
+
+i.  Present the task subsections from 2.1) a) to 2.1 g). 
+ii.  Provide examples data instances, queries and result relations, and other 
+
+proper result demonstration for each task section. 
+
+c)  Conclusion: The main contribution, possible future work, what you’ve 
+
+gained from this  project, and what lesson had been learned. 
+
+d)  References (if any). 
+
+ 
+
+5.  Submission: 
+
+1)  Project report due: Dec. 8, 11:59pm.  
+ 2)  Submit your project report by the command line: submit proj   (proj is the name of  
+       the folder containing your Report.pdf file).  
+ 
+
