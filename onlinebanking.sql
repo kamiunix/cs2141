@@ -16,6 +16,14 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Current Database: `onlinebanking`
+--
+
+CREATE DATABASE /*!32312 IF NOT EXISTS*/ `onlinebanking` /*!40100 DEFAULT CHARACTER SET latin1 */;
+
+USE `onlinebanking`;
+
+--
 -- Table structure for table `account`
 --
 
@@ -321,6 +329,12 @@ DELIMITER ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
+-- Current Database: `onlinebanking`
+--
+
+USE `onlinebanking`;
+
+--
 -- Final view structure for view `account_info`
 --
 
@@ -386,4 +400,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-12-08 14:12:31
+-- Dump completed on 2015-12-08 14:15:50
