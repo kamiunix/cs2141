@@ -48,9 +48,30 @@ CREATE TABLE `account` (
 
 LOCK TABLES `account` WRITE;
 /*!40000 ALTER TABLE `account` DISABLE KEYS */;
-INSERT INTO `account` VALUES (1,'checking',14020.12,0.00,1),(2,'checking',3258.43,0.00,1),(3,'checking',352.01,0.00,1),(4,'checking',0.00,20.00,1),(5,'checking',1029.10,0.00,1),(6,'checking',1048.49,0.00,1),(7,'checking',11748.49,0.00,1),(8,'checking',9183.81,0.00,1),(9,'checking',383.74,0.00,1),(10,'checking',49.05,0.00,1),(11,'checking',4023.05,0.00,1),(12,'checking',429.55,0.00,1),(13,'checking',632.13,0.00,1),(14,'checking',732.41,0.00,1),(15,'checking',29.43,0.00,1),(16,'checking',0.00,20.00,1),(17,'checking',23.01,0.00,1),(18,'checking',2.11,0.00,1),(19,'checking',222.86,0.00,1),(20,'checking',921.93,0.00,1),(21,'savings',11230.00,0.00,2),(22,'checking',872.00,0.00,2),(23,'checking',122.18,0.00,2),(24,'savings',71000.00,0.00,2),(25,'checking',7123.29,0.00,2),(26,'checking',824.08,0.00,2),(27,'checking',980.92,0.00,2),(28,'checking',41.40,0.00,2),(29,'checking',410.80,0.00,2),(30,'savings',23000.00,0.00,2),(31,'savings',2214.00,0.00,2),(32,'checking',1243.00,0.00,2),(33,'checking',431.34,0.00,2),(34,'checking',135.01,0.00,2),(35,'checking',1304.30,0.00,2),(36,'checking',43.30,0.00,2),(37,'checking',934.90,0.00,2),(38,'checking',0.00,20.00,2),(39,'checking',124.99,0.00,2),(40,'checking',999.99,0.00,3),(41,'checking',9343.33,0.00,3),(42,'checking',99.24,0.00,3),(43,'savings',41000.24,0.00,3),(44,'checking',3904.95,0.00,3),(45,'checking',2943.24,0.00,3),(46,'checking',7102.40,0.00,3),(47,'checking',431.03,0.00,3),(48,'checking',9373.34,0.00,3),(49,'checking',5343.24,0.00,3),(50,'savings',235.00,0.00,3),(51,'savings',59412.00,0.00,3),(52,'checking',42523.00,0.00,3),(53,'checking',424.14,0.00,3),(54,'checking',862.35,0.00,3),(55,'checking',932.23,0.00,3),(56,'savings',99999999999999.99,0.00,3);
+INSERT INTO `account` VALUES (1,'checking',17020.12,0.00,1),(2,'checking',118.43,0.00,1),(3,'checking',352.01,0.00,1),(4,'checking',0.00,20.00,1),(5,'checking',1029.10,0.00,1),(6,'checking',1048.49,0.00,1),(7,'checking',11748.49,0.00,1),(8,'checking',9183.81,0.00,1),(9,'checking',383.74,0.00,1),(10,'checking',49.05,0.00,1),(11,'checking',4023.05,0.00,1),(12,'checking',429.55,0.00,1),(13,'checking',632.13,0.00,1),(14,'checking',732.41,0.00,1),(15,'checking',29.43,0.00,1),(16,'checking',0.00,20.00,1),(17,'checking',23.01,0.00,1),(18,'checking',2.11,0.00,1),(19,'checking',222.86,0.00,1),(20,'checking',921.93,0.00,1),(21,'savings',11230.00,0.00,2),(22,'checking',872.00,0.00,2),(23,'checking',122.18,0.00,2),(24,'savings',71000.00,0.00,2),(25,'checking',7123.29,0.00,2),(26,'checking',824.08,0.00,2),(27,'checking',980.92,0.00,2),(28,'checking',41.40,0.00,2),(29,'checking',410.80,0.00,2),(30,'savings',23000.00,0.00,2),(31,'savings',2214.00,0.00,2),(32,'checking',1243.00,0.00,2),(33,'checking',431.34,0.00,2),(34,'checking',135.01,0.00,2),(35,'checking',1304.30,0.00,2),(36,'checking',43.30,0.00,2),(37,'checking',934.90,0.00,2),(38,'checking',0.00,20.00,2),(39,'checking',124.99,0.00,2),(40,'checking',999.99,0.00,3),(41,'checking',9343.33,0.00,3),(42,'checking',99.24,0.00,3),(43,'savings',41000.24,0.00,3),(44,'checking',3904.95,0.00,3),(45,'checking',2943.24,0.00,3),(46,'checking',7102.40,0.00,3),(47,'checking',431.03,0.00,3),(48,'checking',9373.34,0.00,3),(49,'checking',5343.24,0.00,3),(50,'savings',235.00,0.00,3),(51,'savings',59412.00,0.00,3),(52,'checking',42523.00,0.00,3),(53,'checking',424.14,0.00,3),(54,'checking',862.35,0.00,3),(55,'checking',932.23,0.00,3),(56,'savings',99999999999999.99,0.00,3);
 /*!40000 ALTER TABLE `account` ENABLE KEYS */;
 UNLOCK TABLES;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = '' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER acc_check BEFORE UPDATE ON account
+FOR EACH ROW
+BEGIN
+  IF NEW.ballance < 0 THEN
+    SET NEW.holds = OLD.holds + 20;
+  END IF;
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
 -- Temporary table structure for view `account_info`
@@ -330,6 +351,23 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `payHolds` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = '' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `payHolds`(IN account INT, amnt DECIMAL(8,2))
+BEGIN   UPDATE account   SET holds = holds-amnt   WHERE a_num = account; END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `setPassword` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -444,4 +482,4 @@ USE `onlinebanking`;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-12-08 16:06:12
+-- Dump completed on 2015-12-08 17:04:10
