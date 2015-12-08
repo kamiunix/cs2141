@@ -1,3 +1,6 @@
+CREATE DATABASE  IF NOT EXISTS `online_banking` /*!40100 DEFAULT CHARACTER SET latin1 */;
+USE `online_banking`;
+
 -- MySQL dump 10.13  Distrib 5.5.44, for debian-linux-gnu (i686)
 --
 -- Host: localhost    Database: onlinebanking
@@ -43,6 +46,23 @@ LOCK TABLES `account` WRITE;
 INSERT INTO `account` VALUES (1,'checking',12420.12,0.00,1),(2,'checking',3258.43,0.00,1),(3,'checking',352.01,0.00,1),(4,'checking',0.00,20.00,1),(5,'checking',1029.10,0.00,1),(6,'checking',1048.49,0.00,1),(7,'checking',11748.49,0.00,1),(8,'checking',9183.81,0.00,1),(9,'checking',383.74,0.00,1),(10,'checking',49.05,0.00,1),(11,'checking',4023.05,0.00,1),(12,'checking',429.55,0.00,1),(13,'checking',632.13,0.00,1),(14,'checking',732.41,0.00,1),(15,'checking',29.43,0.00,1),(16,'checking',0.00,20.00,1),(17,'checking',23.01,0.00,1),(18,'checking',2.11,0.00,1),(19,'checking',222.86,0.00,1),(20,'checking',921.93,0.00,1),(21,'savings',11230.00,0.00,2),(22,'checking',872.00,0.00,2),(23,'checking',122.18,0.00,2),(24,'savings',71000.00,0.00,2),(25,'checking',7123.29,0.00,2),(26,'checking',824.08,0.00,2),(27,'checking',980.92,0.00,2),(28,'checking',41.40,0.00,2),(29,'checking',410.80,0.00,2),(30,'savings',23000.00,0.00,2),(31,'savings',2214.00,0.00,2),(32,'checking',1243.00,0.00,2),(33,'checking',431.34,0.00,2),(34,'checking',135.01,0.00,2),(35,'checking',1304.30,0.00,2),(36,'checking',43.30,0.00,2),(37,'checking',934.90,0.00,2),(38,'checking',0.00,20.00,2),(39,'checking',124.99,0.00,2),(40,'checking',999.99,0.00,3),(41,'checking',9343.33,0.00,3),(42,'checking',99.24,0.00,3),(43,'savings',41000.24,0.00,3),(44,'checking',3904.95,0.00,3),(45,'checking',2943.24,0.00,3),(46,'checking',7102.40,0.00,3),(47,'checking',431.03,0.00,3),(48,'checking',9373.34,0.00,3),(49,'checking',5343.24,0.00,3),(50,'savings',235.00,0.00,3),(51,'savings',59412.00,0.00,3),(52,'checking',42523.00,0.00,3),(53,'checking',424.14,0.00,3),(54,'checking',862.35,0.00,3),(55,'checking',932.23,0.00,3),(56,'savings',99999999999999.99,0.00,3);
 /*!40000 ALTER TABLE `account` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Temporary table structure for view `account_info`
+--
+
+DROP TABLE IF EXISTS `account_info`;
+/*!50001 DROP VIEW IF EXISTS `account_info`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE TABLE `account_info` (
+  `a_num` tinyint NOT NULL,
+  `type` tinyint NOT NULL,
+  `ballance` tinyint NOT NULL,
+  `holds` tinyint NOT NULL,
+  `c_id` tinyint NOT NULL
+) ENGINE=MyISAM */;
+SET character_set_client = @saved_cs_client;
 
 --
 -- Table structure for table `banker`
@@ -168,6 +188,29 @@ INSERT INTO `customer` VALUES (1,4540025121478301,'5f4dcc3b5aa765d61d8327deb882c
 UNLOCK TABLES;
 
 --
+-- Temporary table structure for view `customer_info`
+--
+
+DROP TABLE IF EXISTS `customer_info`;
+/*!50001 DROP VIEW IF EXISTS `customer_info`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE TABLE `customer_info` (
+  `c_id` tinyint NOT NULL,
+  `first_name` tinyint NOT NULL,
+  `last_name` tinyint NOT NULL,
+  `address` tinyint NOT NULL,
+  `city` tinyint NOT NULL,
+  `country` tinyint NOT NULL,
+  `postal_code` tinyint NOT NULL,
+  `dob` tinyint NOT NULL,
+  `banker_id` tinyint NOT NULL,
+  `banker_fname` tinyint NOT NULL,
+  `banker_lname` tinyint NOT NULL
+) ENGINE=MyISAM */;
+SET character_set_client = @saved_cs_client;
+
+--
 -- Table structure for table `depositor`
 --
 
@@ -221,6 +264,79 @@ LOCK TABLES `loan` WRITE;
 INSERT INTO `loan` VALUES (1,2.50,500.00,1),(2,2.50,700.00,1),(3,2.50,691.21,1),(4,2.50,24000.00,1),(5,5.00,390000.00,1),(6,5.00,494300.00,1),(7,2.50,4300.00,1),(8,2.50,443300.00,2),(9,2.50,853243.00,2),(10,5.00,3414.00,2),(11,5.00,593.00,2),(12,5.00,835.00,2),(13,5.00,14534.00,2),(14,1.00,1453404.00,2),(15,5.00,3553.00,2),(16,10.00,34532.00,3),(17,10.00,23452.00,3),(18,7.50,93243.00,3),(19,7.50,23524.00,3),(20,7.50,543.00,3),(21,7.50,4333.00,3),(22,7.50,345.00,3),(23,10.00,345000.00,3),(24,10.00,345342.00,3),(25,7.50,5343.00,3);
 /*!40000 ALTER TABLE `loan` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Temporary table structure for view `loan_info`
+--
+
+DROP TABLE IF EXISTS `loan_info`;
+/*!50001 DROP VIEW IF EXISTS `loan_info`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE TABLE `loan_info` (
+  `loan_id` tinyint NOT NULL,
+  `interest_rate` tinyint NOT NULL,
+  `ballance` tinyint NOT NULL,
+  `c_id` tinyint NOT NULL
+) ENGINE=MyISAM */;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Final view structure for view `account_info`
+--
+
+/*!50001 DROP TABLE IF EXISTS `account_info`*/;
+/*!50001 DROP VIEW IF EXISTS `account_info`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `account_info` AS select `a`.`a_num` AS `a_num`,`a`.`type` AS `type`,`a`.`ballance` AS `ballance`,`a`.`holds` AS `holds`,`d`.`c_id` AS `c_id` from (`account` `a` join `depositor` `d`) where (`a`.`a_num` = `d`.`a_num`) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `customer_info`
+--
+
+/*!50001 DROP TABLE IF EXISTS `customer_info`*/;
+/*!50001 DROP VIEW IF EXISTS `customer_info`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `customer_info` AS select `c`.`c_id` AS `c_id`,`c`.`first_name` AS `first_name`,`c`.`last_name` AS `last_name`,`c`.`address` AS `address`,`c`.`city` AS `city`,`c`.`country` AS `country`,`c`.`postal_code` AS `postal_code`,`c`.`dob` AS `dob`,`b`.`e_id` AS `banker_id`,`b`.`first_name` AS `banker_fname`,`b`.`last_name` AS `banker_lname` from (`customer` `c` join `banker` `b`) where (`c`.`banker` = `b`.`e_id`) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `loan_info`
+--
+
+/*!50001 DROP TABLE IF EXISTS `loan_info`*/;
+/*!50001 DROP VIEW IF EXISTS `loan_info`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `loan_info` AS select `l`.`loan_id` AS `loan_id`,`l`.`interest_rate` AS `interest_rate`,`l`.`ballance` AS `ballance`,`c`.`c_id` AS `c_id` from (`loan` `l` join `borrower` `c`) where (`l`.`loan_id` = `c`.`loan_id`) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -231,4 +347,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-12-05 16:57:43
+-- Dump completed on 2015-12-08 13:49:59
