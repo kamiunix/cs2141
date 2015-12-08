@@ -1,0 +1,105 @@
+body,h1,h2,h3,p,quote,small,form,input,ul,li,ol,label{
+	/* The reset rules */
+	margin:0px;
+	padding:0px;
+}
+
+html {
+	background: url("https://static.dal.ca/faculty/computerscience/_jcr_content/bgBanner.adaptive.full.high.jpg/1425919188240.jpg") /*no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;    -- Uncomment for wider screen compatibilty */
+}
+body{
+	color:black;
+	font-size:13px;
+	
+    font-family:Arial, Helvetica, sans-serif;
+	width: 100%;
+}
+
+h1{
+	font-size:28px;
+	font-weight:bold;
+	font-family:"Trebuchet MS",Arial, Helvetica, sans-serif;
+	letter-spacing:1px;
+	color:black;
+}
+
+h2{
+	font-family:"Arial Narrow",Arial,Helvetica,sans-serif;
+	font-size:11px;
+	font-weight:normal;
+	letter-spacing:1px;
+	padding-left:2px;
+	text-transform:uppercase;
+	white-space:nowrap;
+	margin-top:4px;
+	color:#515050;
+}
+
+#main p{
+	padding-bottom:8px;
+}
+
+.clear{
+	clear:both;
+}
+
+#main{
+	width:800px;
+	/* Centering it in the middle of the page */
+	margin:60px auto;
+}
+
+.container{
+	margin-top:20px;
+    background-color: rgba(216,184,10, 0.7);
+	border:1px solid #4d4d4d;
+	padding:15px;
+	
+	/* Rounded corners */
+	-moz-border-radius:20px;
+	-khtml-border-radius: 20px;
+	-webkit-border-radius: 20px;
+	border-radius:20px;
+    overflow:auto;
+}
+
+.err{
+	color:red;
+}
+
+.success{
+	color:#00CC00;
+}
+
+a, a:visited {
+	color:#00BBFF;
+	text-decoration:none;
+	outline:none;
+}
+
+a:hover{
+	text-decoration:underline;
+}
+
+.tutorial-info{
+	text-align:center;
+	padding:10px;
+}
+
+.wrap {
+    position:left;
+    margin:0 auto;
+}
+
+#foot {
+    background:#272727;
+    width:100%;
+    float:left;
+    position:fixed;
+    bottom:0;
+    z-index:999999;
+}
