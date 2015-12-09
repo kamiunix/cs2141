@@ -1,0 +1,80 @@
+BONUSES
+
+  Views Implemented:
+
+    Three views have been implemented to facilitate web development.
+
+    customer_info
+
+      Shows the customer as well as his banker; names supplementid id numbers for clarity. 
+      Returns (c_id, customer_first_name, customer_last_name, address, city, country, postal_code, 
+      dob, b_id, banker_first_name, banker_last_name)
+
+    account_info
+
+      Shows detailed account info; concatenating the account table and depositor table.
+      Returns (a_num, type, ballance, holds, c_id)
+
+    loan_info
+
+      Show detailed loan info; concatenating the loan table and the borrower table.
+      Returns (loan_id, interest_rate, ballance, c_id)
+  
+  Procedures Implemented:
+
+    Five procedures have been implemented to facilitate web development.
+    The procedures are called within the php servers backend and implemented
+    within the databases.
+
+    getAccountInfo(string type, c_id account)
+      
+      Given an account type, eg. checking or savings, and an account number, 
+      this procedure returns the account ballance and holds.
+
+    transferToAcc(a_num from, a_num to, int amount)
+
+      Given two account numbers, a source and destination, and an amount, this
+      procedure will transfer funds between accounts.
+
+    loanPayment(loan_id loan, a_num account, int amount)
+
+      Given a loan number destination (destination of payement), account number
+      (source of payement), and amount to transfer, this procedure will transfer
+      funds from a given account to a given loan. 
+        eg. bill payement.
+
+    setPassword(string passd, c_id id)
+
+      Given a password and customer id, this procedure will change a users
+      password within the database.
+
+    payHolds(a_num account, int amount)
+
+      Given an account, will pay given amount on account's holds.
+
+  Trigger Implemented:
+
+    acc_check ON account
+
+      Triggers on account update and observes the NEW ballance. If an update
+      updates an account to a negative value (overdraft in account ballance)
+      this trigger increments the account's holds by 20.
+
+  Transaction Implemented:
+
+    Implemented the transfer between account (transferToAcc) as a transaction.
+    Transaction is implemented within php.
+
+
+
+Matt's REFERENCE
+
+ referenced in online_banking/login_panel/css/slide.css
+
+ Name: Sliding Login Panel with jQuery 1.3.2
+ Author: Jeremie Tisseau
+ Author URI: http://web-kreation.com/ 
+ Script URI: http://web-kreation.com/index.php/tutorials/nice-clean-sliding-login-panel-built-with-jquery/
+ Date: March 26, 2009
+ Version: 1.0
+
