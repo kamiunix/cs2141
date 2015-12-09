@@ -50,20 +50,31 @@ if (isset($_POST['submit']))
 
         $usr = $_POST['username'];
         $pswd = $_POST['password'];
-
+        // Check for employee or customer.
+        if ($usr < 4521999999999999){
+           $_SESSION['banker'] = true;
+           $sqlquery = "SELECT CONCAT(first_name, \" \", last_name) AS 'Name', e_id FROM banker WHERE card_number='$usr' AND first_name='$pswd'";
+           $result = mysqli_query($con, $sqlquery);
+        }
+        else{
+            $sqlquery = "SELECT CONCAT(first_name, \" \", last_name) AS 'Name', c_id FROM customer WHERE card_number='$usr' AND passwd='$pswd'";
+            $result = mysqli_query($con, $sqlquery);
+        }
         // Match user and password.
-        $sqlquery = "SELECT CONCAT(first_name, \" \", last_name) AS 'Name', c_id FROM customer WHERE card_number='$usr' AND passwd='$pswd'";
-        $result = mysqli_query($con, $sqlquery);
 
         $count = mysqli_num_rows($result);
 		if($count == 1)
 		{
+
 			// User and password match... countinue
             $row = mysqli_fetch_assoc($result);
 			
 			// Store some data in the session
 			$_SESSION['usr']=$row['Name'];
-			$_SESSION['id'] = $row['c_id'];
+            if (isset($_SESSION['banker']))
+                $_SESSION['id'] = $row['e_id'];
+            else
+                $_SESSION['id'] = $row['c_id'];
 
             // Remember user only if checked.
             if ($_POST['rememberMe'] != 0)
@@ -217,32 +228,48 @@ if (isset($_SESSION['msg']))
 				<p class="grey">View account and customer information by navigating the user panel.</p>
 			</div>
             
-            
-            <div class="left">
+            <?php
+                  if (!isset($_SESSION['banker'])){
+            echo'<div class="left">
             
             <h1>Services</h1>
             
             <p></p>
             <p><a href="transfer_bw_accounts.php">Transfer between accounts</a></p>
-            <p><a href="registered.php">Transfer across accounts</a></p>
-            <p><a href="registered.php">Make a payment</a></p>
-            <p><a href="registered.php">Apply for a Loan</a></p>
+            <p><a href="loan_payment.php">Make a payment</a></p>
+            <p><a href="change_password.php">Change Password</a></p>
             
             </div>
             
             <div class="left right">
-            <h1>Welcome, <?php echo $_SESSION['usr'] ?></h1> 
+            <h1>Welcome, '.$_SESSION['usr'].'</h1> 
             <p></p>
             <p><a href="account_info.php">Account Information</a></p>
             <p><a href="personal_info.php">Personal Information</a></p>
             <p><a href="?logoff">Log off</a></p>
+            </div></div></div>';
+            
+            }
+            else{
+            echo'<div class="left">
+            <h1>Services</h1>
+            
+            <p></p>
+            <p><a href="transfer_bw_accounts.php">Customer List</a></p>
+            <p><a href="edit_hold.php">Edit Customer Holds</a></p>
+            
             </div>
             
+            <div class="left right">
+            <h1>Welcome,'.$_SESSION['usr'].'</h1> 
+            <p></p>
+            <p><a href="?logoff">Log off</a></p>
+            </div></div></div>';
+            }?>
             <?php
-			endif;
+                endif;
 			?>
-		</div>
-	</div> <!-- /login -->	
+	 <!-- /login -->	
 
     <!-- The tab on top -->	
 	<div class="tab">

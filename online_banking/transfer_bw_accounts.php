@@ -43,11 +43,11 @@ require('common.php');
         <input list="accounts" name="accounts">
         <datalist id="accounts">
         <?php 
-            $query = "SELECT type from account as a, customer as c, depositor as d WHERE c.c_id = '$_SESSION[id]' and c.c_id = d.c_id and a.a_num = d.a_num";
+            $query = "SELECT a.type, a.a_num from account as a, customer as c, depositor as d WHERE c.c_id = '$_SESSION[id]' and c.c_id = d.c_id and a.a_num = d.a_num";
             $result = mysqli_query($con, $query);
             echo mysqli_error($con);
             while ($row = mysqli_fetch_assoc($result)){
-                echo '<option value= "'.$row['type'].'">';
+                echo '<option value= "'.$row['a_num'].'">';
             }
         ?>
         </datalist>
@@ -57,11 +57,11 @@ require('common.php');
     <?php
             echo '<div class="container"> <h2>To:</h2>';
             echo '<input list="accounts2" name="accounts2"> <datalist id="accounts2">';
-            $query = "SELECT type from account as a, customer as c, depositor as d WHERE c.c_id = '$_SESSION[id]' and c.c_id = d.c_id and a.a_num = d.a_num and a.type != '$account'";
+            $query = "SELECT a.type, a.a_num from account as a, customer as c, depositor as d WHERE c.c_id = '$_SESSION[id]' and c.c_id = d.c_id and a.a_num = d.a_num and a.type != '$account'";
             $result = mysqli_query($con, $query);
             echo mysqli_error($con);
             while ($row = mysqli_fetch_assoc($result)){
-                echo '<option value= "'.$row['type'].'">';
+                echo '<option value= "'.$row['a_num'].'">';
             }
             echo '</datalist> </div>';
             echo '<div class="container"> <h2><Amount:</h2>';
@@ -71,20 +71,22 @@ require('common.php');
                 $err[] = 'All the fields must be filled in!';
             else
             {
-                echo '<div class="container">';
-                $query = "SELECT type from account as a, customer as c, depositor as d WHERE c.c_id = '$_SESSION[id]' and c.c_id = d.c_id and a.a_num = d.a_num";
-                $result = mysqli_query($con, $query);
-                echo mysqli_error($con);
-                while ($row = mysqli_fetch_assoc($result)){
-                    echo '<h2><strong>'.$row['type'].'</strong></h2>';
-                    $result2 = mysqli_query($con, "CALL getAccountInfo('$row[type]', $_SESSION[id]);");
-                    echo mysqli_error($con);
-                    $row2 = mysqli_fetch_assoc($result2);
-                    echo '<h2>&emsp;BALANCE: $ '.$row2['ballance'].'</h2><br>';
-                }
-                echo '</div>';
+                // All entered, transfer money
+                mysqli_query($con, "CALL transferToAcc('$_POST[accounts]', '$_POST[amount]', '$_POST[accounts2]');"); 
             }
-    ?>
+            echo '<div class="container">';
+            $query = "SELECT a.type, a.ballance, a.a_num from account as a, customer as c, depositor as d WHERE c.c_id = '$_SESSION[id]' and c.c_id = d.c_id and a.a_num = d.a_num";
+            $result = mysqli_query($con, $query);
+            echo mysqli_error($con);
+            while ($row = mysqli_fetch_assoc($result)){
+                $rows[] = $row;
+            }
+            foreach($rows as $curr){
+                echo '<h2><strong>'.$curr['type'].' - '.$curr['a_num'].'</strong></h2>';
+                echo '<h2>&emsp;BALANCE: $ '.$curr['ballance'].'</h2><br>';
+            }
+            echo '</div>';
+?>
     
     <?php 
         else:

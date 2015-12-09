@@ -9,7 +9,7 @@ require('common.php');
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Make a Loan Payment</title>
+<title>Edit Holds</title>
     
     <link rel="stylesheet" type="text/css" href="css/info_page.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="login_panel/css/slide.css" media="screen" />
@@ -29,7 +29,7 @@ require('common.php');
 <div id ="outerborder">
     <div id = "innerborder">
 <div id="main">
-    <h1>Make a Loan Payment</h1>
+    <h1>Edit Holds</h1>
    <?php
 
         if (isset($_SESSION['id'])):
@@ -43,11 +43,11 @@ require('common.php');
         <input list="accounts" name="accounts">
         <datalist id="accounts">
         <?php 
-            $query = "SELECT a.type, a.a_num from account as a, customer as c, depositor as d WHERE c.c_id = '$_SESSION[id]' and c.c_id = d.c_id and a.a_num = d.a_num";
+            $query = "SELECT a.a_num FROM account as a, banker as b, customer as c, depositor as d Where c.c_id = d.c_id and d.a_num = a.a_num and b.e_id = '$_SESSION[id]' and c.banker = b.e_id";
             $result = mysqli_query($con, $query);
             echo mysqli_error($con);
             while ($row = mysqli_fetch_assoc($result)){
-                echo '<option value= "'.$row['a_num'].'">';
+                echo '<option value= "'.$row['c_id'].'">';
             }
         ?>
         </datalist>
@@ -55,41 +55,21 @@ require('common.php');
     </div>
     
     <?php
-            echo '<div class="container"> <h2>Select Loan:</h2>';
-            echo '<input list="loans" name="loans"> <datalist id="loans">';
-            $query = "SELECT l.loan_id from loan as l, borrower as b  WHERE b.loan_id = l.loan_id and b.c_id = '$_SESSION[id]'";
-            $result = mysqli_query($con, $query);
-            echo mysqli_error($con);
-            while ($row = mysqli_fetch_assoc($result)){
-                echo '<option value= "'.$row['loan_id'].'">';
-            }
-            echo '</datalist> </div>';
-            echo '<div class="container"> <h2><Amount:</h2>';
+            echo '<div class="container"> <h2><New Amount:</h2>';
             echo '<input type="number" name="amount">';
             echo '<input type="submit"></form></div>';
             echo '<div class="container">';
-            if(!isset($_POST['accounts']) || !isset($_POST['loans']) || !isset($_POST['amount']))
+            if(!isset($_POST['accounts']) || !isset($_POST['amount']))
                 $err[] = 'All the fields must be filled in!';
             else
             {
-                // All entered, transfer money
-                mysqli_query($con, "CALL loanPayment('$_POST[accounts]', '$_POST[amount]', '$_POST[loans]');"); 
-                $query = "SELECT l.loan_id, l.ballance from loan as l Where l.loan_id = '$_POST[loans]'";
+                mysqli_query($con, "CALL payHolds('$_POST[accounts]', '$_POST[amount]');");
+                echo '<div class="container"> <h2>Holds:</h2>';
+                $query = "SELECT holds FROM account Where a_num = '$_POST[accounts]'";
                 $result = mysqli_query($con, $query);
                 echo mysqli_error($con);
                 $curr = mysqli_fetch_assoc($result);
-                echo '<h2><strong>Loan - '.$curr['loan_id'].'</strong></h2>';
-                echo '<h2>&emsp;BALANCE: $ '.$curr['ballance'].'</h2><br>';
-            }
-            $query = "SELECT a.type, a.ballance, a.a_num from account as a, customer as c, depositor as d WHERE c.c_id = '$_SESSION[id]' and c.c_id = d.c_id and a.a_num = d.a_num";
-            $result = mysqli_query($con, $query);
-            echo mysqli_error($con);
-            while ($row = mysqli_fetch_assoc($result)){
-                $rows[] = $row;
-            }
-            foreach($rows as $curr){
-                echo '<h2><strong>'.$curr['type'].' - '.$curr['a_num'].'</strong></h2>';
-                echo '<h2>&emsp;BALANCE: $ '.$curr['ballance'].'</h2><br>';
+                echo '<h2><strong>Hold: '.$curr['holds'].'</strong></h2>';
             }
             echo '</div>';
 ?>
