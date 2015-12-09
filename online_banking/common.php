@@ -214,6 +214,7 @@ if (isset($_SESSION['msg']))
 					<input type="submit" name="submit" value="Submit" class="bt_register" />
 				</form>
 			</div>
+            </div></div>
             
             <?php
 			
